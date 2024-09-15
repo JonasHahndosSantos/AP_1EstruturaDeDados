@@ -6,7 +6,6 @@ public class Matriz {
     private static int colunas;
 
     //criação da matriz
-
     public Matriz(int linhas, int colunas) {
         this.linhas = linhas;
         this.colunas = colunas;
@@ -14,7 +13,6 @@ public class Matriz {
     }
 
     //metodo para preencher aleatoriamente
-
     public void preencherAleatorio(int limite) {
         Random random = new Random();
         for (int i = 0; i < linhas; i++) {
@@ -25,7 +23,6 @@ public class Matriz {
     }
 
     //inserir um elemento na matriz
-
     public static void inserirElemento(int linha, int coluna, int valor) {
         if (linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas) {
             matriz[linha][coluna] = valor;
@@ -36,7 +33,6 @@ public class Matriz {
     }
 
     //metodo para remover elemento
-
     public void removerElemento(int linha, int coluna) {
         if (linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas) {
             matriz[linha][coluna] = 0; // Define como 0 para indicar remoção
@@ -45,8 +41,8 @@ public class Matriz {
             System.out.println("Posição inválida.");
         }
     }
-    //metodo para exibir a matriz
 
+    //metodo para exibir a matriz
     public void exibirMatriz() {
         for (int i = 0; i < linhas; i++) {
             for (int j = 0; j < colunas; j++) {
@@ -57,7 +53,6 @@ public class Matriz {
     }
 
     //metodo bubbleSort
-
     private void bubbleSort(int[] array) {
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {
@@ -72,15 +67,20 @@ public class Matriz {
     }
 
     // ordenação por linhas
-
     public void ordenarPorLinhas() {
         for (int i = 0; i < linhas; i++) {
             bubbleSort(matriz[i]);
         }
     }
 
-    // ordenação por colunas
+    // ordenação com o metodo Merge
+    public void ordenarPorLinhasMerge() {
+        for (int i = 0; i < linhas; i++) {
+            mergeSort(matriz[i], 0, matriz[i].length - 1);
+        }
+    }
 
+    // ordenação por colunas
     public void ordenarPorColunas() {
         for (int j = 0; j < colunas; j++) {
             int[] coluna = new int[linhas];
@@ -94,8 +94,21 @@ public class Matriz {
         }
     }
 
-    // implementação do Merge Sort
+    //ordenação de coluna com merge
+    public void ordenarPorColunasMerge() {
+        for (int j = 0; j < colunas; j++) {
+            int[] coluna = new int[linhas];
+            for (int i = 0; i < linhas; i++) {
+                coluna[i] = matriz[i][j];
+            }
+            mergeSort(coluna, 0, coluna.length - 1);
+            for (int i = 0; i < linhas; i++) {
+                matriz[i][j] = coluna[i];
+            }
+        }
+    }
 
+    // implementação do Merge Sort
     private void mergeSort(int[] array, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -106,7 +119,6 @@ public class Matriz {
     }
 
     // ordenar a matriz completa, achatar e reordenar
-
     public void ordenarMatrizCompleta() {
         int[] vetor = new int[linhas * colunas];
         int index = 0;
@@ -118,7 +130,6 @@ public class Matriz {
         }
 
         // ordena o vetor
-
         mergeSort(vetor, 0, vetor.length - 1);
 
         // reconstrói a matriz
@@ -129,8 +140,13 @@ public class Matriz {
             }
         }
     }
-    //implementação do merge
 
+
+
+
+
+
+    //implementação do merge
     private void merge(int[] array, int left, int mid, int right) {
         int n1 = mid - left + 1;
         int n2 = right - mid;

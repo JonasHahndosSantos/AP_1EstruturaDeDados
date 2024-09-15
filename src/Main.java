@@ -5,12 +5,10 @@ public class Main {
     public static void main(String[] args) {
 
         //matriz é gerada uma unica vez
-
          Matriz matriz = new Matriz(5,5); // Cria a matriz com dimensões fixas
 
          matriz.preencherAleatorio(10); // Preenche a matriz com valores aleatórios até 10
-
-
+        
         while(true) {
 
             int opcao = 0;
@@ -20,6 +18,8 @@ public class Main {
             int coluna = 0;
 
             int valor = 0;
+
+            int escolha = 0;
 
             Scanner scanner = new Scanner(System.in);
 
@@ -36,7 +36,6 @@ public class Main {
             opcao = scanner.nextInt();
 
             //usuario sai do loop
-
             if(opcao == 0){
 
                 System.out.println("Encerrando...");
@@ -77,20 +76,44 @@ public class Main {
                     break;
 
                 case 4: //usuario ordena por linha
+                    System.out.println("digite 1 para blubesort \n digete 2 para merge:");
+                    escolha = scanner.nextInt();
+                    if(escolha == 1) {
+                        System.out.println("A sua matriz antes da ordenação por linha é: \n");
+                        matriz.exibirMatriz();
+                        matriz.ordenarPorLinhas();
+                        System.out.println("\nA sua matriz após a ordenação por linha é: \n");
+                        matriz.exibirMatriz();
+                        break;
+                    }if(escolha == 2) {
                     System.out.println("A sua matriz antes da ordenação por linha é: \n");
                     matriz.exibirMatriz();
-                    matriz.ordenarPorLinhas();
+                    matriz.ordenarPorLinhasMerge();
                     System.out.println("\nA sua matriz após a ordenação por linha é: \n");
                     matriz.exibirMatriz();
                     break;
-
+                }else{System.out.println("numero invalido\n");
+                        break;
+                    }
                 case 5: //usuario ordena por coluna
+                    System.out.println("digite 1 para blubesort \n digete 2 para merge:");
+                    escolha = scanner.nextInt();
+                    if(escolha == 1) {
                     System.out.println("A sua matriz antes da ordenação por coluna é: \n");
                     matriz.exibirMatriz();
                     matriz.ordenarPorColunas();
                     System.out.println("\nA sua matriz após a ordenação por coluna é: \n");
                     matriz.exibirMatriz();
                     break;
+                    }else if(escolha == 2){
+                        System.out.println("A sua matriz antes da ordenação por coluna é: \n");
+                        matriz.exibirMatriz();
+                        matriz.ordenarPorColunasMerge();
+                        System.out.println("\nA sua matriz após a ordenação por coluna é: \n");
+                        matriz.exibirMatriz();  
+                    }else{System.out.println("numero invalido\n");
+                        break;
+                    }
 
                 case 6: //usuario ordena a matriz completa
                     System.out.println("A sua matriz antes da ordenação completa é: \n");
@@ -99,9 +122,7 @@ public class Main {
                     System.out.println("\nA sua matriz após a ordenação completa é: \n");
                     matriz.exibirMatriz();
                     break;
-
             }
-
         }
     }
 }
